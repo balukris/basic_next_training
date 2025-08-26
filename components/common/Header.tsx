@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import NavLink from "./NavLink";
 
 export default function Header() {
   return (
     <div className="bg-gray-500 text-white">
       <div className="flex items-center justify-between mx-auto py-4 px-4">
-        <Link href="/" className=" flex space-x-0.5 items-center">
+        <Link href="/" className="flex space-x-0.5 items-center">
           <Image
             src="/images/logo.png"
             width={30}
@@ -19,13 +20,19 @@ export default function Header() {
         <nav>
           <ul className="flex space-x-2">
             <li>
-              <Link href="/">Home</Link>
+              <NavLink href="/" activeClassname="text-gray-800">
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link href="/blogs">Blogs</Link>
+              <NavLink href="/blogs" activeClassname="text-gray-800">
+                Blogs
+              </NavLink>
             </li>
             <li>
-              <Link href="/category">Category</Link>
+              <NavLink href="/category" activeClassname="text-gray-800">
+                Category
+              </NavLink>
             </li>
           </ul>
         </nav>
