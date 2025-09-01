@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import NavLink from "@/components/common/NavLink";
 import { getBlogs } from "@/lib/blogs";
 import { blogType } from "@/types/blogs";
 import Listloader from "./listloader";
@@ -19,7 +20,12 @@ async function BlogList() {
           >
             {item.title}
             <div className="flex space-x-2">
-              <button className={buttonstyle("text-amber-50")}>View</button>
+              <NavLink
+                className={buttonstyle("text-amber-50")}
+                href={`/blogs/${item.id}`}
+              >
+                View
+              </NavLink>
               <button className={buttonstyle("text-red-600")}>Delete</button>
             </div>
           </li>
