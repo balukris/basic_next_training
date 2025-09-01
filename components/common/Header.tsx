@@ -30,8 +30,8 @@ export default function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink href="/category" activeClassname="text-gray-800">
-                Category
+              <NavLink href="/addBlogs" activeClassname="text-gray-800">
+                Add Blogs
               </NavLink>
             </li>
           </ul>
