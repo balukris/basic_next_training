@@ -45,6 +45,4 @@ export async function submitBlogs(
     const { fieldErrors } = result.error.flatten((issue) => issue.message);
     return { success: false, fieldErrors };
   }
-
-  return result;
 }
