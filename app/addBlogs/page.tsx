@@ -1,10 +1,20 @@
-import { submitBlogs } from "@/components/addBlogs/actions";
+"use client";
+
+import { submitBlogs, type FormState } from "@/components/addBlogs/actions";
+import { useFormState } from "react-dom";
+import SubmitButton from "@/components/addBlogs/blog-submit-button";
+
+const initialState: FormState = { success: true };
 
 function AddBlogs() {
+  const [state, formAction] = useFormState(submitBlogs, initialState);
+
+  console.log(state.fieldErrors?.author?.[0], "state");
+
   return (
     <div className="text-center">
       <h1 className="text-3xl">Add Blogs</h1>
-      <form className="space-y-4 w-[50%] mx-auto" action={submitBlogs}>
+      <form className="space-y-4 w-[50%] mx-auto" action={formAction}>
         <div>
           <label className="block text-left text-sm font-medium text-gray-700">
             Title
@@ -15,6 +25,11 @@ function AddBlogs() {
             className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             name="title"
           />
+          {state.fieldErrors?.title?.[0] && (
+            <small className=" text-red-600">
+              {state.fieldErrors?.title?.[0]}
+            </small>
+          )}
         </div>
 
         <div>
@@ -27,6 +42,11 @@ function AddBlogs() {
             className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             name="author"
           />
+          {state.fieldErrors?.author?.[0] && (
+            <small className=" text-red-600">
+              {state.fieldErrors?.author?.[0]}
+            </small>
+          )}
         </div>
 
         <div>
@@ -39,6 +59,11 @@ function AddBlogs() {
             className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             name="description"
           ></textarea>
+          {state.fieldErrors?.description?.[0] && (
+            <small className=" text-red-600">
+              {state.fieldErrors?.description?.[0]}
+            </small>
+          )}
         </div>
         <div>
           <label className="block text-left text-sm font-medium text-gray-700">
@@ -53,12 +78,7 @@ function AddBlogs() {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
-        >
-          Submit
-        </button>
+        <SubmitButton />
       </form>
     </div>
   );

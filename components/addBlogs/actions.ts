@@ -1,9 +1,29 @@
 "use server";
-
+import { z } from "zod";
 import { saveBlog } from "@/lib/blogs";
 import { redirect } from "next/navigation";
 
-export async function submitBlogs(formData: FormData) {
+const blogSchema = z.object({
+  title: z.string().min(3, "Title is required"),
+  author: z.string().min(1, "Author is required"),
+  description: z.string().min(1, "Description is required"),
+});
+
+type fieldErrorType = {
+  title?: string[] | undefined;
+  author?: string[] | undefined;
+  description?: string[] | undefined;
+};
+
+export type FormState = {
+  success: boolean;
+  fieldErrors?: fieldErrorType;
+};
+
+export async function submitBlogs(
+  _prevState: FormState,
+  formData: FormData
+): Promise<FormState> {
   const today = new Date();
   const formattedDate = today.toISOString().split("T")[0];
 
@@ -16,6 +36,15 @@ export async function submitBlogs(formData: FormData) {
     active: "true",
   };
 
-  await saveBlog(raw);
-  redirect("/blogs");
+  const result = blogSchema.safeParse(raw);
+
+  if (result?.success) {
+    await saveBlog(raw);
+    redirect("/blogs");
+  } else {
+    const { fieldErrors } = result.error.flatten((issue) => issue.message);
+    return { success: false, fieldErrors };
+  }
+
+  return result;
 }
