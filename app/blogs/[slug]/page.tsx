@@ -19,11 +19,7 @@ const BlogbyId = async ({ params }: { params: { slug: string } }) => {
         </div>
 
         <div className="relative h-[300] w-[500]">
-          <Image
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-            alt="image-blog-detail"
-            fill
-          />
+          <Image src={blog?.image || ""} alt="image-blog-detail" fill />
         </div>
         <div>{blog.description}</div>
       </main>

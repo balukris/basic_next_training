@@ -9,6 +9,7 @@ const blogs = [
       "A deep dive into how AI is transforming industries across the globe.",
     date: "2025-03-12",
     active: "true",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
   {
     title: "10 Tips for Healthy Remote Work",
@@ -17,6 +18,7 @@ const blogs = [
       "Practical strategies to maintain productivity and mental well-being while working remotely.",
     date: "2025-01-28",
     active: "false",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
   {
     title: "Mastering JavaScript in 2025",
@@ -25,6 +27,7 @@ const blogs = [
       "An updated guide on modern JavaScript features and best practices.",
     date: "2025-02-15",
     active: "true",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
   {
     title: "The Rise of Sustainable Tech",
@@ -33,6 +36,7 @@ const blogs = [
       "How technology is driving sustainability initiatives worldwide.",
     date: "2025-03-01",
     active: "true",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
   {
     title: "Travel on a Budget: 2025 Edition",
@@ -40,6 +44,7 @@ const blogs = [
     description: "Smart ways to see the world without breaking the bank.",
     date: "2025-02-05",
     active: "false",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   },
 ];
 
@@ -50,7 +55,8 @@ db.prepare(
     author TEXT NOT NULL,
     description TEXT NOT NULL,
     date TEXT NOT NULL,
-    active TEXT NOT NULL
+    active TEXT NOT NULL,
+    image TEXT NOT NULL
   )`
 ).run();
 
@@ -62,7 +68,8 @@ async function initData() {
       @author,
       @description,
       @date,
-      @active
+      @active,
+      @image
       )
    `);
 

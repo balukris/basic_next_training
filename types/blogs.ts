@@ -5,4 +5,5 @@ export type blogType = {
   description: string;
   date: string;
   active: string;
+  image?: string;
 };
